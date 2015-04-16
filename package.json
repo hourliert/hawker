@@ -18,7 +18,11 @@
     "tsd": "^0.5.7",
     "typescript": "1.5.0-alpha"
   },
+  "bin": {
+    "hawker": "bin/hawker-cli.js"
+  },
+  "main": "build/js/hawker.js",
   "scripts": {
-    "postinstall": "tsd reinstall"
+    "postinstall": "tsd reinstall && gulp build"
   }
 }

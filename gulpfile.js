@@ -45,7 +45,10 @@ gulp.task('bump:major', function() {
  * BUILD task
  */
 gulp.task('build', function() {
-    var tsResult = gulp.src(PATHS.lib + '/**/*.ts')
+    var tsResult = gulp.src([
+        'cli.ts',
+        PATHS.lib + '/**/*.ts'
+    ])
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject));
 
