@@ -1,0 +1,18 @@
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+
+#transpiled file by webstorm
+lib/**/*.js
+lib/**/*.js.map
+
+#webstorm folder
+.idea
+
+#mac files
+.DS_Store
+
+#typescript definition file
+typings
+
+
