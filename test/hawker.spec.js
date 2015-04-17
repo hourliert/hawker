@@ -2,7 +2,7 @@
  * Created by thomashourlier on 4/16/15.
  */
 
-var hawker = require('../lib/hawker'),
+var hawker = require('../lib/Hawker'),
     assert = require('assert');
 
 describe("hawker", function () {

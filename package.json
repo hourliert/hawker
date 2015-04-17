@@ -1,10 +1,10 @@
 {
   "name": "hawker",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Bootstrap your docker containers.",
   "repository": "https://github.com/hourliert/hawker",
   "dependencies": {
-    "lodash": "^3.7.0",
+    "q": "^1.2.0",
     "yargs": "^3.7.2"
   },
   "devDependencies": {
@@ -16,7 +16,7 @@
     "gulp-typescript": "^2.6.0",
     "merge2": "^0.3.4",
     "mocha": "^2.2.4",
-    "tsd": "^0.5.7",
+    "tsd": "^0.6.0-beta.5",
     "typescript": "1.5.0-alpha"
   },
   "bin": {
