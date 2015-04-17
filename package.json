@@ -1,6 +1,6 @@
 {
   "name": "hawker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Bootstrap your docker containers.",
   "repository": "https://github.com/hourliert/hawker",
   "dependencies": {
