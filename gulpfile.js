@@ -59,13 +59,19 @@ gulp.task('build', function() {
             .pipe(gulp.dest(PATHS.build + '/js'))
     ]);
 });
-
+gulp.task('build:watch', ['build'], function() {
+    gulp.watch([
+        PATHS.lib + '/**/*.ts'
+    ], ['build']);
+});
 gulp.task('tsd:install', function(callback) {
     tsd({
         command: 'reinstall',
         config: './tsd.json'
     }, callback);
 });
+
+
 
 /**
  * TEST tasks
@@ -74,7 +80,6 @@ gulp.task('test', function () {
     return gulp.src(PATHS.test + '/**/*.js', {read: false})
         .pipe(mocha({reporter: 'nyan'}));
 });
-
 gulp.task('test:watch', ['test'], function () {
     gulp.watch([
         PATHS.lib + '/**/*.js',

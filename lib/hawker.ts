@@ -5,18 +5,23 @@
 /// <reference path="_all.ts"/>
 
 import Core from "./core";
-import * as _ from "lodash";
+import Logger from "./utils/logger";
 
 export class Hawker {
-    public uniqArray: Array<number>;
-
     constructor() {
-        Core();
 
-        this.uniqArray = _.uniq([1,2,2,3,5,6,6,7,8,8,8,8]);
-        console.log(this.uniqArray);
+    }
+
+    public launchFromUrl(url: string) {
+        Logger.debug('Launching from url: ' + url);
+    }
+
+    public launchFromFile(path: string) {
+        Logger.debug('Launching from file: ' + path);
     }
 }
+
+export default new Hawker();
 
 
 

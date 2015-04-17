@@ -4,7 +4,8 @@
   "description": "Bootstrap your docker containers.",
   "repository": "https://github.com/hourliert/hawker",
   "dependencies": {
-    "lodash": "^3.7.0"
+    "lodash": "^3.7.0",
+    "yargs": "^3.7.2"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
