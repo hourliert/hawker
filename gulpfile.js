@@ -96,7 +96,9 @@ gulp.task('test:watch', ['test'], function () {
     ], ['test']);
 });
 
-
+/**
+ * CLEANING tasks
+ */
 gulp.task('clean', function(cb) {
     del([
         'build',
@@ -104,5 +106,7 @@ gulp.task('clean', function(cb) {
     ], cb);
 });
 
-
+/**
+ * CI tasks
+ */
 gulp.task('ci', gsync.sync(['clean', 'tsd:install', 'build', 'test']));
