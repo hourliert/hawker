@@ -28,6 +28,6 @@
   },
   "main": "build/js/hawker.js",
   "scripts": {
-    "prepublish": "tsd reinstall --save && gulp build"
+    "prepublish": "gulp ci"
   }
 }
