@@ -6,7 +6,7 @@ var gulp       = require('gulp'),
     tsd        = require('gulp-tsd'),
     gutil      = require('gulp-util'),
     del        = require('del'),
-    gsync       = require('gulp-sync')(gulp),
+    sequence   = require('run-sequence'),
     bump       = require('gulp-bump');
 
 var PATHS = {
@@ -109,4 +109,6 @@ gulp.task('clean', function(cb) {
 /**
  * CI tasks
  */
-gulp.task('ci', gsync.sync(['clean', 'tsd:install', 'build', 'test']));
+gulp.task('ci', function(cb) {
+    sequence('clean', 'tsd:install', 'build', 'test', cb);
+});
