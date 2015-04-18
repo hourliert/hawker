@@ -2,7 +2,7 @@
  * Created by thomashourlier on 4/17/15.
  */
 
-var Parser = require('../../lib/parser/parser').Parser,
+var Parser = require('../../build/js/parser/parser').Parser,
     LoggerMock = require('../utils/Logger.mock');
 
 describe("Parser", function() {

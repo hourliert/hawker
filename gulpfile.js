@@ -5,6 +5,8 @@ var gulp       = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     tsd        = require('gulp-tsd'),
     gutil      = require('gulp-util'),
+    del        = require('del'),
+    gsync       = require('gulp-sync')(gulp),
     bump       = require('gulp-bump');
 
 var PATHS = {
@@ -93,3 +95,14 @@ gulp.task('test:watch', ['test'], function () {
         PATHS.test + '/**/*.js'
     ], ['test']);
 });
+
+
+gulp.task('clean', function(cb) {
+    del([
+        'build',
+        'typings'
+    ], cb);
+});
+
+
+gulp.task('ci', gsync.sync(['clean', 'tsd:install', 'build', 'test']));
