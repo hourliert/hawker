@@ -51,7 +51,7 @@
                 return require('../package').version;
             })
             .argv,
-        hawker = new (require('../build/js/hawker').Hawker)(argv.verbose),
+        hawker = new (require('../build/js/Hawker').Hawker)(argv.verbose),
         logger = hawker.getLogger();
 
     switch(argv._[0]) {

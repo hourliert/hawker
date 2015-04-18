@@ -2,7 +2,7 @@
  * Created by thomashourlier on 4/16/15.
  */
 
-var Hawker = require('../build/js/hawker').Hawker;
+var Hawker = require('../build/js/Hawker').Hawker;
 
 describe("Hawker", function() {
     var hawker;
