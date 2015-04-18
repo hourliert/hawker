@@ -4,6 +4,7 @@ var gulp       = require('gulp'),
     mocha      = require('gulp-mocha'),
     sourcemaps = require('gulp-sourcemaps'),
     tsd        = require('gulp-tsd'),
+    gutil      = require('gulp-util'),
     bump       = require('gulp-bump');
 
 var PATHS = {
@@ -78,7 +79,13 @@ gulp.task('tsd:install', function(callback) {
  */
 gulp.task('test', function () {
     return gulp.src(PATHS.test + '/**/*.js', {read: false})
-        .pipe(mocha({reporter: 'nyan'}));
+        .pipe(mocha({
+            reporter: 'spec',
+            globals: {
+                should: require('should')
+            }
+        }))
+        .on('error', gutil.log);
 });
 gulp.task('test:watch', ['test'], function () {
     gulp.watch([

@@ -8,8 +8,8 @@ export enum VerboseLevel { Warn, Info, Debug }
 
 export class Logger {
     private verboseLevel: VerboseLevel;
-    constructor(level: VerboseLevel) {
-        this.verboseLevel = level;
+    constructor(level?: VerboseLevel) {
+        this.verboseLevel = (level ? level : 0);
     }
     public warn(...args: any[]) {
         this.verboseLevel >= 0 && console.log.apply(console, args);

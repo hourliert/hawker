@@ -2,12 +2,36 @@
  * Created by thomashourlier on 4/16/15.
  */
 
-var hawker = require('../lib/hawker'),
-    assert = require('assert');
+var Hawker = require('../lib/hawker').Hawker;
 
-describe("hawker", function () {
-    it("should be defined", function () {
-        var main = new hawker.Hawker();
-        assert.deepEqual([ 1, 2, 3, 5, 6, 7, 8 ], main.uniqArray);
+describe("Hawker", function() {
+    var hawker;
+
+    beforeEach(function() {
+        hawker = new Hawker();
+    });
+
+    it("should get the Logger", function() {
+        var logger = hawker.getLogger();
+        logger.should.have.property('verboseLevel');
+    });
+
+    it("should get the Parser", function() {
+        var parser = hawker.getParser();
+        parser.should.have.property('logger');
+    });
+
+    it('should launch hawker from a file', function() {
+        hawker.launchFromFile('mock');
+
+        hawker.loader.should.have.property('logger');
+        hawker.loader.should.have.property('parser');
+    });
+
+    it('should launch hawker from an url', function() {
+        hawker.launchFromUrl('mock');
+
+        /*hawker.loader.should.have.property('logger');
+        hawker.loader.should.have.property('parser');*/
     });
 });

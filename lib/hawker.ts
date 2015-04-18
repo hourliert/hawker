@@ -14,7 +14,7 @@ export class Hawker {
     private logger: Logger;
     private parser: Parser;
 
-    constructor(level: VerboseLevel) {
+    constructor(level?: VerboseLevel) {
         this.logger = new Logger(level);
         this.parser = new Parser(this.logger);
     }
