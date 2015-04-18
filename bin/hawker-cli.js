@@ -51,10 +51,8 @@
                 return require('../package').version;
             })
             .argv,
-        logger = require('../build/js/utils/Logger').default,
-        hawker = require('../build/js/Hawker').default;
-
-    logger.setLevel(argv.verbose);
+        hawker = new (require('../build/js/hawker').Hawker)(argv.verbose),
+        logger = hawker.getLogger();
 
     switch(argv._[0]) {
         case 'init':

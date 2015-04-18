@@ -4,11 +4,19 @@
 
 /// <reference path="../_all.ts"/>
 
+import {Logger} from "../utils/Logger";
+import {Parser, IConfiguration} from "../parser/Parser";
+
 export class Loader {
-    constructor() {
+    protected logger: Logger;
+    protected parser: Parser;
+
+    constructor(logger: Logger, parser: Parser) {
+        this.logger = logger;
+        this.parser = parser;
     }
 
-    public getConfig(uri: string): Q.IPromise<any> {
+    public getConfig(uri: string): Q.IPromise<IConfiguration> {
         throw 'Could not call getConfig here.';
     }
 }

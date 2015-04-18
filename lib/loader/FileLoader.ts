@@ -5,23 +5,27 @@
 /// <reference path="../_all.ts"/>
 
 import {Loader} from './Loader';
-import Logger from '../utils/Logger';
+import {Logger} from "../utils/Logger";
+import {Parser, IConfiguration} from "../parser/Parser";
+
 import * as fs from 'fs';
 import * as Q from 'q';
 
 export class FileLoader extends Loader {
-    constructor() {
-        super();
+    constructor(logger: Logger, parser: Parser) {
+        super(logger, parser);
     }
 
-    public getConfig(uri: string): Q.IPromise<any> {
+    public getConfig(uri: string): Q.IPromise<IConfiguration> {
+        this.logger.debug('Reading file');
+
         var defer = Q.defer<any>();
 
-        fs.readFile(uri, 'utf8', function (err, data) {
+        fs.readFile(uri, 'utf8', (err, data) => {
             if (err) defer.reject(err);
 
-            let obj = JSON.parse(data);
-            defer.resolve(obj);
+            this.logger.debug('File read. Begining parsing.');
+            defer.resolve(this.parser.parseConfig(data));
         });
 
         return defer.promise;
