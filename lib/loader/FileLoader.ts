@@ -24,8 +24,10 @@ export class FileLoader extends Loader {
         fs.readFile(uri, 'utf8', (err, data) => {
             if (err) defer.reject(err);
 
-            this.logger.debug('File read. Begining parsing.');
-            defer.resolve(this.parser.parseConfig(data));
+            this.logger.debug('File read.');
+            var config = this.parser.parseConfig(data);
+
+            defer.resolve(config);
         });
 
         return defer.promise;

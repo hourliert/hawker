@@ -2,13 +2,42 @@
  * Created by thomashourlier on 4/16/15.
  */
 
-var Hawker = require('../build/js/Hawker').Hawker;
+var sinon = require('sinon'),
+    mockery = require('mockery');
 
 describe("Hawker", function() {
-    var hawker;
+    var Hawker, LoaderType,
+        Logger,
+        Parser,
+        Loader,
+        FileLoader,
+        hawker;
 
     beforeEach(function() {
+        mockery.enable({
+            useCleanCache: true,
+            warnOnReplace: false,
+            warnOnUnregistered: false
+        });
+
+        mockery.registerAllowable('Q');
+
+        Loader = require('./loader/Loader.mock');
+        Parser = require('./parser/Parser.mock');
+        Logger = require('./utils/Logger.mock');
+        mockery.registerMock('./utils/Logger', Logger);
+        mockery.registerMock('./parser/Parser', Parser);
+        mockery.registerMock('./loader/Loader', Loader);
+        mockery.registerMock('./loader/FileLoader', Loader);
+
+        Hawker = require('../build/js/Hawker').Hawker;
+        LoaderType = require('../build/js/Hawker').LoaderType;
+
         hawker = new Hawker();
+    });
+
+    afterEach(function() {
+        mockery.disable();
     });
 
     it("should get the Logger", function() {
@@ -21,17 +50,25 @@ describe("Hawker", function() {
         parser.should.have.property('logger');
     });
 
-    it('should launch hawker from a file', function() {
-        /*hawker.launchFromFile('mock');
+    it('should define a file loader', function() {
+        hawker.defineLoader(LoaderType.File);
+
+        hawker.loader.should.have.property('logger');
+        hawker.loader.should.have.property('parser');
+    });
+
+    it('should define a url loader', function() {
+        /*hawker.defineLoader(LoaderType.Url);
 
         hawker.loader.should.have.property('logger');
         hawker.loader.should.have.property('parser');*/
     });
 
-    it('should launch hawker from an url', function() {
-        hawker.launchFromUrl('mock');
+    it('should launch hawker', function() {
+        hawker.defineLoader(LoaderType.File);
+        hawker.launch();
 
-        /*hawker.loader.should.have.property('logger');
-        hawker.loader.should.have.property('parser');*/
+        hawker.state.should.be.true;
     });
+
 });

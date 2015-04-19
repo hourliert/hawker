@@ -51,6 +51,7 @@
                 return require('../package').version;
             })
             .argv,
+        LoaderType = require('../build/js/Hawker').LoaderType,
         hawker = new (require('../build/js/Hawker').Hawker)(argv.verbose),
         logger = hawker.getLogger();
 
@@ -58,20 +59,18 @@
         case 'init':
             logger.debug('Init Command');
             logger.warn('This command is not implemented yet.');
+            process.exit(0);
             break;
         case 'launch':
             logger.debug('Launch Command');
 
-            if (argv.f) {
-                logger.debug('Launch from file');
-                hawker.launchFromFile(argv.f);
-            }
-            if (argv.u) {
-                logger.debug('Launch from url');
-                hawker.launchFromUrl(argv.u);
-            }
+            if (argv.f) hawker.defineLoader(LoaderType.File);
+            else if (argv.u) hawker.defineLoader(LoaderType.Url);
+
+            hawker.launch(argv.f || argv.u);
             break;
         default:
-            console.warn('Insupported command');
+            console.warn('Unsupported command');
+            process.exit(0);
     }
 })();

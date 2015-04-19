@@ -2,11 +2,11 @@
  * Created by thomashourlier on 4/17/15.
  */
 
-var Parser = {
-    logger: require('../utils/Logger.mock'),
-    parseConfig: function() {
+function Parser() {
+    this.logger = null;
+}
+Parser.prototype.parseConfig = function() {
 
-    }
 };
 
-module.exports = Parser;
+exports.Parser = Parser;

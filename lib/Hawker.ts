@@ -9,10 +9,14 @@ import {Loader} from "./loader/Loader";
 import {FileLoader} from "./loader/FileLoader";
 import {Parser, IConfiguration} from "./parser/Parser";
 
+export enum LoaderType {File, Url};
+
 export class Hawker {
     private loader: Loader;
     private logger: Logger;
     private parser: Parser;
+
+    private state: boolean;
 
     constructor(level?: VerboseLevel) {
         this.logger = new Logger(level);
@@ -26,18 +30,23 @@ export class Hawker {
         return this.parser;
     }
 
-    public launchFromUrl(url: string) {
-        this.logger.debug('Launching from url: ' + url);
-    }
-    public launchFromFile(path: string) {
-        this.logger.debug('Instantiate FileLoader to load: ' + path);
+    public defineLoader(type: LoaderType) {
+        this.logger.debug('Defining Loader');
 
-        this.loader = new FileLoader(this.logger, this.parser);
-        this.getConfig(path);
+        switch (type) {
+            case LoaderType.File:
+                this.loader = new FileLoader(this.logger, this.parser);
+                break;
+            case LoaderType.Url:
+                this.loader = null;
+                break;
+        }
     }
 
-    public getConfig(uri: string) {
-        this.logger.debug('Getting configuration');
+    public launch(uri: string) {
+        this.logger.debug('Launching... Getting configuration');
+
+        this.state = true;
 
         this.loader.getConfig(uri).then((obj: IConfiguration) => {
             this.logger.info('Configuration: ', obj);

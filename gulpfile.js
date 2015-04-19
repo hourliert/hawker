@@ -84,7 +84,9 @@ gulp.task('test', function () {
         .pipe(mocha({
             reporter: 'spec',
             globals: {
-                should: require('should')
+                should: require('should'),
+                sinon: require('sinon'),
+                mockery: require('mockery')
             }
         }))
         .on('error', gutil.log);

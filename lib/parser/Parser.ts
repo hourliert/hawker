@@ -13,6 +13,7 @@ export class Parser {
     }
 
     public parseConfig(data: string): IConfiguration {
+        this.logger.debug('Parsing data...');
         return JSON.parse(data);
     }
 }

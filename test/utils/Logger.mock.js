@@ -2,17 +2,17 @@
  * Created by thomashourlier on 4/17/15.
  */
 
-var Logger = {
-    verboseLevel: 0,
-    warn: function() {
+function Logger() {
+    this.verboseLevel = 0;
+}
+Logger.prototype.warn = function(){
 
-    },
-    info: function() {
+};
+Logger.prototype.info = function(){
 
-    },
-    debug: function() {
+};
+Logger.prototype.debug = function(){
 
-    }
 };
 
-module.exports = Logger;
+exports.Logger = Logger;
