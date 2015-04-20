@@ -24,6 +24,10 @@ describe("Parser", function() {
         parser = new Parser(new Logger.Logger());
     });
 
+    afterEach(function() {
+        mockery.disable();
+    });
+
     it("should be defined", function() {
         parser.should.have.property('logger');
     });

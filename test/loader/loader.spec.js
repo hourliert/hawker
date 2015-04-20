@@ -28,6 +28,10 @@ describe("FileLoader", function() {
         loader = new FileLoader(new Logger.Logger(), new Parser.Parser());
     });
 
+    afterEach(function() {
+        mockery.disable();
+    });
+
     it("should be defined", function() {
         loader.should.have.property('logger');
         loader.should.have.property('parser');

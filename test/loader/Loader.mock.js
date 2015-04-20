@@ -2,7 +2,7 @@
  * Created by thomashourlier on 4/18/15.
  */
 
-var Q = require('Q');
+var Q = require('q');
 
 function Loader() {
     this.logger = null;

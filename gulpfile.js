@@ -1,6 +1,6 @@
 var gulp       = require('gulp'),
     ts         = require('gulp-typescript'),
-    merge      = require('merge2'),
+    merge      = require('merge-stream'),
     mocha      = require('gulp-mocha'),
     sourcemaps = require('gulp-sourcemaps'),
     tsd        = require('gulp-tsd'),
@@ -49,7 +49,6 @@ gulp.task('bump:major', function() {
  */
 gulp.task('build', function() {
     var tsResult = gulp.src([
-        'cli.ts',
         PATHS.lib + '/**/*.ts'
     ])
         .pipe(sourcemaps.init())
@@ -79,7 +78,7 @@ gulp.task('tsd:install', function(callback) {
 /**
  * TEST tasks
  */
-gulp.task('test', function () {
+gulp.task('test', ['build'], function () {
     return gulp.src(PATHS.test + '/**/*.js', {read: false})
         .pipe(mocha({
             reporter: 'spec',
@@ -93,7 +92,7 @@ gulp.task('test', function () {
 });
 gulp.task('test:watch', ['test'], function () {
     gulp.watch([
-        PATHS.lib + '/**/*.js',
+        PATHS.lib + '/**/*.ts',
         PATHS.test + '/**/*.js'
     ], ['test']);
 });
@@ -112,5 +111,5 @@ gulp.task('clean', function(cb) {
  * CI tasks
  */
 gulp.task('ci', function(cb) {
-    sequence('clean', 'tsd:install', 'build', 'test', cb);
+    sequence('clean', 'tsd:install', 'test', cb);
 });
