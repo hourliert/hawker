@@ -40,21 +40,23 @@ describe("Hawker", function() {
         mockery.disable();
     });
 
+    it("should be defined", function() {
+        hawker.should.be.instanceof(Hawker);
+    });
+
     it("should get the Logger", function() {
         var logger = hawker.getLogger();
-        logger.should.have.property('verboseLevel');
+        logger.should.be.instanceof(Logger.Logger);
     });
 
     it("should get the Parser", function() {
         var parser = hawker.getParser();
-        parser.should.have.property('logger');
+        parser.should.be.instanceof(Parser.Parser);
     });
 
     it('should define a file loader', function() {
         hawker.defineLoader(LoaderType.File);
-
-        hawker.loader.should.have.property('logger');
-        hawker.loader.should.have.property('parser');
+        hawker.loader.should.be.instanceOf(Loader.FileLoader);
     });
 
     it('should define a url loader', function() {
@@ -64,11 +66,9 @@ describe("Hawker", function() {
         hawker.loader.should.have.property('parser');*/
     });
 
-    it('should launch hawker', function() {
+    it('should launch hawker with a configuration file', function() {
         hawker.defineLoader(LoaderType.File);
         hawker.launch();
-
-        hawker.state.should.be.true;
     });
 
 });

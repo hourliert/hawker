@@ -10,6 +10,15 @@
     },
     "q/Q.d.ts": {
       "commit": "52fa2b9ce36f2c5843204e9bfbaada7cded9b47a"
+    },
+    "should/should.d.ts": {
+      "commit": "1957eb54fbb7ef0d0397c2c78a5b5e638e813ec8"
+    },
+    "sinon/sinon.d.ts": {
+      "commit": "1957eb54fbb7ef0d0397c2c78a5b5e638e813ec8"
+    },
+    "mockery/mockery.d.ts": {
+      "commit": "1957eb54fbb7ef0d0397c2c78a5b5e638e813ec8"
     }
   }
 }

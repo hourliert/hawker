@@ -18,13 +18,22 @@ describe("FileLoader", function() {
             warnOnUnregistered: false
         });
 
-        mockery.registerAllowable('Q');
+        mockery.registerAllowable('q');
+
         Logger = require('../utils/Logger.mock');
         Parser = require('../parser/Parser.mock');
-        mockery.registerMock('../utils/Logger', Logger);
-        mockery.registerMock('../parser/Parser', Parser);
-        FileLoader = require('../../build/js/loader/FileLoader').FileLoader;
 
+        mockery.registerMock('fs', {
+            readFile: function(uri, charset, cb) {
+                if (uri === 'error') {
+                    cb('error');
+                } else {
+                    cb(null, 'json data file');
+                }
+            }
+        });
+
+        FileLoader = require('../../build/js/loader/FileLoader').FileLoader;
         loader = new FileLoader(new Logger.Logger(), new Parser.Parser());
     });
 
@@ -33,11 +42,35 @@ describe("FileLoader", function() {
     });
 
     it("should be defined", function() {
-        loader.should.have.property('logger');
-        loader.should.have.property('parser');
+        loader.should.be.instanceof(FileLoader);
     });
 
-    it('should get a configuration file', function() {
+    it('should get a correct configuration file', function(done) {
+        var promise = loader.getConfig('myfile.json');
 
+        promise.then(function (config) {
+            config.should.containDeep({
+                myConfiguration: true
+            });
+            done();
+        }, function(err) {
+            err.should.equal('error');
+            done();
+        }).catch(function (err){
+            done(err);
+        });
+    });
+
+    it('should get a incorrect configuration file', function(done) {
+        var promise = loader.getConfig('error');
+
+        promise.then(function () {
+            done();
+        }, function(err) {
+            err.should.equal('error');
+            done();
+        }).catch(function (err){
+            done(err);
+        });
     });
 });

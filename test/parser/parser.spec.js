@@ -18,9 +18,9 @@ describe("Parser", function() {
         });
 
         Logger = require('../utils/Logger.mock');
-        mockery.registerMock('../utils/Logger', Logger);
-        Parser = require('../../build/js/parser/Parser').Parser;
+        mockery.registerSubstitute('../utils/Logger', '../utils/Logger.mock');
 
+        Parser = require('../../build/js/parser/Parser').Parser;
         parser = new Parser(new Logger.Logger());
     });
 
@@ -29,11 +29,18 @@ describe("Parser", function() {
     });
 
     it("should be defined", function() {
-        parser.should.have.property('logger');
+        parser.should.be.instanceof(Parser);
     });
 
-    it('should parse configuration file', function() {
-        //test here when configuration will be defined
+    it('should parse a correct configuration file', function() {
+        parser.parseConfig('{"version": "0.0.0"}').should.containDeep({
+            version: '0.0.0'
+        }).and.should.not.throw();
+    });
 
+    it('should parse a incorrect configuration file', function() {
+        (function() {
+            parser.parseConfig('{ incorrect: 11');
+        }).should.throw('Parser: Invalid json');
     });
 });

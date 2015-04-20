@@ -14,7 +14,16 @@ export class Parser {
 
     public parseConfig(data: string): IConfiguration {
         this.logger.debug('Parsing data...');
-        return JSON.parse(data);
+
+        var json;
+
+        try {
+            json = JSON.parse(data);
+        } catch (e) {
+            throw new Error("Parser: Invalid json");
+        }
+
+        return json;
     }
 }
 

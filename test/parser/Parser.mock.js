@@ -6,7 +6,10 @@ function Parser() {
     this.logger = null;
 }
 Parser.prototype.parseConfig = function() {
-
+    return {
+        myConfiguration: true
+    };
 };
 
 exports.Parser = Parser;
+

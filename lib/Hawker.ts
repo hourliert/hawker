@@ -9,14 +9,12 @@ import {Loader} from "./loader/Loader";
 import {FileLoader} from "./loader/FileLoader";
 import {Parser, IConfiguration} from "./parser/Parser";
 
-export enum LoaderType {File, Url};
+export enum LoaderType {File, Url}
 
 export class Hawker {
     private loader: Loader;
     private logger: Logger;
     private parser: Parser;
-
-    private state: boolean;
 
     constructor(level?: VerboseLevel) {
         this.logger = new Logger(level);
@@ -45,8 +43,6 @@ export class Hawker {
 
     public launch(uri: string) {
         this.logger.debug('Launching... Getting configuration');
-
-        this.state = true;
 
         this.loader.getConfig(uri).then((obj: IConfiguration) => {
             this.logger.info('Configuration: ', obj);

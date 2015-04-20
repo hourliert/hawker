@@ -18,7 +18,9 @@ function FileLoader() {
 FileLoader.prototype = new Loader();
 FileLoader.prototype.getConfig = function() {
     var defer = Q.defer();
-    defer.resolve();
+    defer.resolve({
+        myConfiguration: true
+    });
     return defer.promise;
 };
 
@@ -28,7 +30,9 @@ function UrlLoader() {
 UrlLoader.prototype = new Loader();
 UrlLoader.prototype.getConfig = function() {
     var defer = Q.defer();
-    defer.resolve();
+    defer.resolve({
+        myConfiguration: true
+    });
     return defer.promise;
 };
 
